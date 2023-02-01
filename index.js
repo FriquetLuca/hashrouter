@@ -38,7 +38,11 @@ window.addEventListener('popstate', (event) => {
   handleNavigation(location.pathname);
 });
 
-const splittedURL = location.pathname.split("#");
+const splittedURL = location.href.split("#");
+console.log("Pathname");
+console.log(location.pathname);
+console.log("Href")
+console.log(location.href);
 switch(splittedURL.length) {
   case 2:
     history.pushState({}, '', '/hashrouter' + splittedURL[1]);
