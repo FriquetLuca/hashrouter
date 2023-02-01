@@ -1,27 +1,24 @@
-const projectName = "hashrouter";
+import { config } from "./config.js";
 const content = document.getElementById('content');
 
 const routes = {
-  '/hashrouter/': () => {
+  '/home': () => {
     content.innerHTML = '<h1>Home page</h1>';
   },
-  '/home/': () => {
-    content.innerHTML = '<h1>Home page</h1>';
-  },
-  '/about/': () => {
+  '/about': () => {
     content.innerHTML = '<h1>About page</h1>';
   },
-  '/contact/': () => {
+  '/contact': () => {
     content.innerHTML = '<h1>Contact page</h1>';
   },
-  '/404/': () => {
+  '/404': () => {
     content.innerHTML = '<h1>404 Page Not Found</h1>';
   }
 };
-routes[`/${projectName}/`] = routes['/home/'];
+routes[`/${config.projectName}/`] = routes['/home'];
 
 const handleNavigation = (path) => {
-  const route = routes[(path.length > 1 && path[path.length - 1] !== '/') ? `${path}/` : path] || routes['/404'];
+  const route = routes[path] || routes['/404'];
   route();
 };
 
@@ -29,8 +26,8 @@ document.addEventListener('click', (event) => {
   const target = event.target;
   if (target.tagName === 'A') {
     event.preventDefault();
-    const href = target.getAttribute('href');
-    history.pushState({}, '', `/${projectName}${href}`);
+    const href = target.getAttribute('url');
+    history.pushState({}, '', `/${config.projectName}${href}`);
     handleNavigation(href);
   }
 });
@@ -42,7 +39,7 @@ window.addEventListener('popstate', (event) => {
 const splittedURL = location.href.split("#");
 switch(splittedURL.length) {
   case 2:
-    history.pushState({}, '', `/${projectName}${splittedURL[1]}`);
+    history.pushState({}, '', `/${config.projectName}${splittedURL[1]}`);
     handleNavigation(splittedURL[1]);
     break;
   default:
