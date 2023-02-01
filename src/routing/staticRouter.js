@@ -11,19 +11,33 @@ class StaticRouter {
         this.content = document.querySelector(config.rootElement);
         this.routes = {};
         for(const route of allRouteControllers) {
-            const currentRoute = route();
-            this.routes[currentRoute.route] = () => {
-                content.innerHTML = currentRoute.content;
+            const currentRoute = route(new URLSearchParams()).route;
+            this.routes[currentRoute] = (params) => {
+                content.innerHTML = route(params).content;
             };
         }
         const index = this.routes[config.indexRoute];
-        this.routes[`/${config.projectName}/`] = index;
-        this.routes[`/index.html`] = index;
-        this.routes[`/`] = index;
+        this.skippablePath = [
+            `/${config.projectName}/`,
+            '/index.html',
+            '/'
+        ];
+        this.skippablePath.forEach(p => this.routes[p] = index);
     }
     handleNavigation(path) {
-        const route = this.routes[path] || this.routes['/404'];
-        route();
+        let splitedPath = path.split('?')[0];
+        const isSplitable = (path) => {
+            let splitable = true;
+            for(const skip of this.skippablePath) {
+                splitable = splitable && (skip !== path);
+            }
+            return splitable;
+        }
+        if(isSplitable(splitedPath) && splitedPath.endsWith("/")) {
+            splitedPath = splitedPath.substring(0, splitedPath.length - 1);
+        }
+        const route = this.routes[splitedPath] || this.routes['/404'];
+        route(new URLSearchParams(window.location.search));
     };
     addRoute(routeController) {
         this.routes[routeController.route] = () => {
