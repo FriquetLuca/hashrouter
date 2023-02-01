@@ -1,6 +1,9 @@
 const content = document.getElementById('content');
 
 const routes = {
+  '/hashrouter/': () => {
+    return routes['/home'];
+  },
   '/home': () => {
     content.innerHTML = '<h1>Home</h1>';
   },
@@ -10,14 +13,14 @@ const routes = {
   '/contact': () => {
     content.innerHTML = '<h1>Contact</h1>';
   },
-  '*': () => {
+  '/404': () => {
     content.innerHTML = '<h1>404 Page Not Found</h1>';
   }
 };
 
 const handleNavigation = (path) => {
   console.log(path)
-  const route = routes[path] || routes['/hashrouter/home'];
+  const route = routes[path] || routes['/404'];
   route();
 };
 
