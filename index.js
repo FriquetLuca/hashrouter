@@ -1,13 +1,13 @@
 const content = document.getElementById('content');
 
 const routes = {
-  '/hashrouter/home': () => {
+  '/home': () => {
     content.innerHTML = '<h1>Home</h1>';
   },
-  '/hashrouter/about': () => {
+  '/about': () => {
     content.innerHTML = '<h1>About</h1>';
   },
-  '/hashrouter/contact': () => {
+  '/contact': () => {
     content.innerHTML = '<h1>Contact</h1>';
   },
   '*': () => {
