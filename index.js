@@ -2,7 +2,7 @@ const content = document.getElementById('content');
 
 const routes = {
   '/hashrouter/': () => {
-    return routes['/home'];
+    content.innerHTML = '<h1>Home</h1>';
   },
   '/home': () => {
     content.innerHTML = '<h1>Home</h1>';
@@ -19,12 +19,6 @@ const routes = {
 };
 
 const handleNavigation = (path) => {
-  console.log("Path");
-  console.log(location.pathname);
-  console.log("Pathname");
-  console.log(location.pathname);
-  console.log("Href")
-  console.log(location.href);
   const route = routes[path] || routes['/404'];
   route();
 };
