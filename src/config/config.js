@@ -1,3 +1,5 @@
 export const config = {
-        projectName: "hashrouter"
+    projectName: "hashrouter",
+    indexRoute: "/home",
+    rootElement: "#content"
 };

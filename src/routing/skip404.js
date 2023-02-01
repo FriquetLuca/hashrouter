@@ -1,4 +1,4 @@
 import { config } from "../config/config.js";
-let m=config.projectName;
-let n=m.length;
-window.location.replace((n>0?`/${m}/#`:'/#')+window.location.pathname.substr(n+1));
+const projectLength = config.projectName.length;
+const prefix = projectLength > 0 ? `/${config.projectName}/#` : '/#';
+window.location.replace(`${prefix}${window.location.pathname.substr(projectLength + 1)}`);
