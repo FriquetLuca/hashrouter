@@ -5,23 +5,23 @@ const routes = {
   '/hashrouter/': () => {
     content.innerHTML = '<h1>Home page</h1>';
   },
-  '/home': () => {
+  '/home/': () => {
     content.innerHTML = '<h1>Home page</h1>';
   },
-  '/about': () => {
+  '/about/': () => {
     content.innerHTML = '<h1>About page</h1>';
   },
-  '/contact': () => {
+  '/contact/': () => {
     content.innerHTML = '<h1>Contact page</h1>';
   },
-  '/404': () => {
+  '/404/': () => {
     content.innerHTML = '<h1>404 Page Not Found</h1>';
   }
 };
-routes[`/${projectName}`] = routes['/home'];
+routes[`/${projectName}/`] = routes['/home/'];
 
 const handleNavigation = (path) => {
-  const route = routes[(path.length > 1 && path[path.length - 1] === '/') ? path.substring(0, path.length - 1) : path] || routes['/404'];
+  const route = routes[(path.length > 1 && path[path.length - 1] !== '/') ? `${path}/` : path] || routes['/404'];
   route();
 };
 
