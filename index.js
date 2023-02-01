@@ -19,7 +19,12 @@ const routes = {
 };
 
 const handleNavigation = (path) => {
-  console.log(path)
+  console.log("Path");
+  console.log(location.pathname);
+  console.log("Pathname");
+  console.log(location.pathname);
+  console.log("Href")
+  console.log(location.href);
   const route = routes[path] || routes['/404'];
   route();
 };
@@ -39,10 +44,6 @@ window.addEventListener('popstate', (event) => {
 });
 
 const splittedURL = location.href.split("#");
-console.log("Pathname");
-console.log(location.pathname);
-console.log("Href")
-console.log(location.href);
 switch(splittedURL.length) {
   case 2:
     history.pushState({}, '', '/hashrouter' + splittedURL[1]);
