@@ -1,13 +1,13 @@
 const content = document.getElementById('content');
 
 const routes = {
-  '/home': () => {
+  '#/home': () => {
     content.innerHTML = '<h1>Home</h1>';
   },
-  '/about': () => {
+  '#/about': () => {
     content.innerHTML = '<h1>About</h1>';
   },
-  '/contact': () => {
+  '#/contact': () => {
     content.innerHTML = '<h1>Contact</h1>';
   },
   '*': () => {
@@ -26,13 +26,13 @@ document.addEventListener('click', (event) => {
   if (target.tagName === 'A') {
     event.preventDefault();
     const href = target.getAttribute('href');
-    history.pushState({}, '', href);
+    history.pushState({}, '', `/#${href}`);
     handleNavigation(href);
   }
 });
 
 window.addEventListener('popstate', (event) => {
-  handleNavigation(location.pathname);
+  handleNavigation(`/#${location.pathname}`);
 });
 
-handleNavigation(location.pathname);
+handleNavigation(`/#${location.pathname}`);
