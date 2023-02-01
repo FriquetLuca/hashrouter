@@ -25,7 +25,7 @@ document.addEventListener('click', (event) => {
   if (target.tagName === 'A') {
     event.preventDefault();
     const href = target.getAttribute('href');
-    history.pushState({}, '', href);
+    history.pushState({}, '', `#${href}`);
     handleNavigation(href);
   }
 });
@@ -35,13 +35,3 @@ window.addEventListener('popstate', (event) => {
 });
 
 handleNavigation(location.pathname);
-
-const allRefs = document.querySelectorAll("[href], [src]");
-allRefs.forEach((ref) => {
-  for(const e of ["src", "href"]) {
-    const attr = ref.getAttribute(e);
-    if(attr) {
-      ref.setAttribute(e, `/hashrouter${attr}`);
-    }
-  }
-});
