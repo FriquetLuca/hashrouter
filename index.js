@@ -16,6 +16,7 @@ const routes = {
 };
 
 const handleNavigation = (path) => {
+  console.log(path)
   const route = routes[path] || routes['/home'];
   route();
 };
@@ -25,7 +26,7 @@ document.addEventListener('click', (event) => {
   if (target.tagName === 'A') {
     event.preventDefault();
     const href = target.getAttribute('href');
-    history.pushState({}, '', `#${href}`);
+    history.pushState({}, '', href);
     handleNavigation(href);
   }
 });
