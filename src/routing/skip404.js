@@ -1,7 +1,4 @@
-// import { config } from "../config/config.js";
-const config = {
-    projectName: "hashrouter"
-};
+import { config } from "../config/config.js";
 const projectLength = config.projectName.length;
 const prefix = projectLength > 0 ? `/${config.projectName}/#` : '/#';
 let newLocation = `${prefix}${window.location.pathname.substr(projectLength + 1)}`;
