@@ -1,3 +1,6 @@
+const splittedURL = window.location.search.split("/#/");
+console.log(splittedURL);
+
 const content = document.getElementById('content');
 
 const routes = {
