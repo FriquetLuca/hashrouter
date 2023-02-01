@@ -41,10 +41,12 @@ const router = new StaticRouter([
 document.addEventListener('click', (event) => {
     const target = event.target;
     if (target.tagName === 'A') {
-      event.preventDefault();
-      const href = target.getAttribute('url');
-      history.pushState({}, '', `/${config.projectName}${href}`);
-      router.handleNavigation(href);
+        const currentURL = target.getAttribute('url');
+        if(currentURL) {
+            event.preventDefault();
+            history.pushState({}, '', `/${config.projectName}${currentURL}`);
+            router.handleNavigation(currentURL);
+        }
     }
 });
 window.addEventListener('popstate', () => {
