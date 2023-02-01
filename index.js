@@ -1,6 +1,13 @@
-const splittedURL = window.location.search.split("/#/");
-console.log(splittedURL);
-
+const splittedURL = location.pathname.split("#");
+switch(splittedURL.length) {
+  case 2:
+    history.pushState({}, '', '/hashrouter' + splittedURL[1]);
+    handleNavigation(splittedURL[1]);
+    break;
+  default:
+    handleNavigation(location.pathname);
+    break;
+}
 const content = document.getElementById('content');
 
 const routes = {
@@ -41,4 +48,3 @@ window.addEventListener('popstate', (event) => {
   handleNavigation(location.pathname);
 });
 
-handleNavigation(location.pathname);
