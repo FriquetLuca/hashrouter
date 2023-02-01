@@ -1,13 +1,13 @@
 const content = document.getElementById('content');
 
 const routes = {
-  '#/home': () => {
+  '/hashrouter/home': () => {
     content.innerHTML = '<h1>Home</h1>';
   },
-  '#/about': () => {
+  '/hashrouter/about': () => {
     content.innerHTML = '<h1>About</h1>';
   },
-  '#/contact': () => {
+  '/hashrouter/contact': () => {
     content.innerHTML = '<h1>Contact</h1>';
   },
   '*': () => {
@@ -17,7 +17,7 @@ const routes = {
 
 const handleNavigation = (path) => {
   console.log(path)
-  const route = routes[path] || routes['/home'];
+  const route = routes[path] || routes['/hashrouter/home'];
   route();
 };
 
@@ -26,13 +26,13 @@ document.addEventListener('click', (event) => {
   if (target.tagName === 'A') {
     event.preventDefault();
     const href = target.getAttribute('href');
-    history.pushState({}, '', `/#${href}`);
+    history.pushState({}, '', '/hashrouter' + href);
     handleNavigation(href);
   }
 });
 
 window.addEventListener('popstate', (event) => {
-  handleNavigation(`/#${location.pathname}`);
+  handleNavigation(location.pathname);
 });
 
-handleNavigation(`/#${location.pathname}`);
+handleNavigation(location.pathname);
